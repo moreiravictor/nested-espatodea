@@ -2,10 +2,10 @@ import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
 import { IAdmin } from "../interfaces/admin.interface";
 
 @Entity({name: 'admin'})
-export class Admin {
+export class AdminEntity {
 
     @ObjectIdColumn()
-    id: ObjectID
+    _id: ObjectID
 
     @Column()
     username: string
