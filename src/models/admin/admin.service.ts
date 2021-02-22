@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { plainToClass } from "class-transformer";
-import { Repository } from "typeorm";
 import { AdminRepository } from "./admin.repository";
 import { AdminDTO } from "./dto/AdminDTO";
 import { Admin } from "./serializers/admin.serializer";
@@ -23,8 +22,7 @@ export class AdminService {
         return await this.repository.createEntity(inputs);
     }
     
-    // async update(inputs: AdminDTO): Promise<Admin> {
-    //     const admin = plainToClass(Admin, inputs)
-    //     return await this.repository.updateEntity(admin);
-    // }
+    async update(id: string, inputs: AdminDTO): Promise<Admin> {
+        return await this.repository.updateEntity(id, inputs)
+    }
 }

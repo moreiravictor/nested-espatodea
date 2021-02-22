@@ -22,15 +22,11 @@ export class ModelRepository<T, K extends Model> extends Repository<T> {
       return this.transform(saved)
     }
 
-    // async updateEntity(entity: K, relations: string[] = []): Promise<K> {
-    //   console.log(entity)
-    //   const found = await this.findOne({where: {_id: entity._id}})
-    //   console.log(found)
-    //   return Promise.reject('a')
-    //   // return this.update(entity._id, inputs)
-    //   //   .then(async () => await this.get(entity._id.toString(), relations))
-    //   //   .catch(error => Promise.reject(error));
-    // }
+    async updateEntity(id: string, inputs: QueryDeepPartialEntity<T>, relations: string[] = []): Promise<K> {
+      return await this.update(id, inputs)
+      .then(async () => await this.get(id, relations))
+      .catch(err => Promise.reject(err))
+    }
 
     transform(model: T, transformOptions = {}): K {
       return plainToClass(Model, model, transformOptions) as K;
